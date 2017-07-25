@@ -20,7 +20,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 let apiRoutes = require('./routes/api');
-var webRoutes = require('./routes/web');
+let webRoutes = require('./routes/web');
 app.use('/api', apiRoutes);
 app.use('/', webRoutes);
 
@@ -32,7 +32,11 @@ app.use(function(req, res, next) {
 });
 
 app.use('/api', function(err, req, res, next) {
-  res.status(404).send({status: 'Not Found'});
+  console.log(req);
+  res.status(404).send({
+    message: 'Not Found',
+    error: err
+  });
 });
 
 // error handler
