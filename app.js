@@ -21,9 +21,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Route content type
 app.use(function(req, res, next) {
-  if (req.accepts(['html', 'json']) === 'json') {
-    console.log("Content JSON");
-  }
+  console.log('Try to fork content types here.');
   next();
 });
 
