@@ -19,6 +19,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Route content type
+app.use(function(req, res, next) {
+  if (req.accepts(['html', 'json']) === 'json') {
+    console.log("Content JSON");
+  }
+  next();
+});
+
 let apiRoutes = require('./routes/api');
 let webRoutes = require('./routes/web');
 app.use('/api', apiRoutes);
