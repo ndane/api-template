@@ -10,6 +10,14 @@ module.exports = {
   },
 
   user: function(req, res, next) {
-    res.json({ message: 'Single user' });
+    res.json({ message: 'Single user with id ' + req.params.id });
+  },
+
+  update: function(req, res, next) {
+    res.json({ message: 'Update user with id ' + req.params.id });
+  },
+
+  delete: function(req, res, next) {
+    res.json({ message: 'Delete user with id ' + req.params.id });
   }
 };
