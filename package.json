@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "build": "rimraf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
-    "start": "npm run build && nodemon dist/app.js"
+    "start": "nodemon --exec babel-node app.js",
+    "serve": "npm run build && node dist/app.js"
   },
   "engines": {
     "node": ">=4.0.0"
