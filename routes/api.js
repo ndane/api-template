@@ -1,14 +1,13 @@
-var express = require('express');
-var router = express.Router();
+let express = require('express');
+let router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.send({ title: 'Express' });
+  res.send({ message: "There is nothing here." });
 });
 
-/* GET users listing. */
-router.get('/users', function(req, res, next) {
-  res.send({ status: 'Not Found: ' + req });
-});
+/* User Routes */
+let UserController = require('../controllers/UserController');
+router.get('/users', UserController.users);
 
 module.exports = router;
