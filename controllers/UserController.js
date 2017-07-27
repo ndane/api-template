@@ -1,4 +1,4 @@
-let express = require('express')
+const express = require('express')
 
 module.exports = {
   users: function(req, res, next) {

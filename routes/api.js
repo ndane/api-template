@@ -1,8 +1,8 @@
-let express = require('express');
-let router = express.Router();
+const express = require('express');
+const router = express.Router();
 
 /* User Routes */
-let UserController = require('../controllers/UserController');
+const UserController = require('../controllers/UserController');
 router.route('/users')
       .get(UserController.users)
       .post(UserController.create);

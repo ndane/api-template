@@ -1,11 +1,11 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+const express = require('express');
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 
-var app = express();
+const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -25,7 +25,7 @@ app.use('/api', require('./routes/api'))
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Resource not found: ' + req.path);
+  let err = new Error('Resource not found: ' + req.path);
   err.status = 404;
   next(err, req, res, next);
 });
@@ -54,6 +54,6 @@ app.use(function(err, req, res, next) {
 module.exports = app;
 
 // Start server
-let port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 app.listen(port);
 console.log("Started server on port " + port);
