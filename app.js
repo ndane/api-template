@@ -19,30 +19,15 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Route content type
-app.use(function(req, res, next) {
-  console.log('Try to fork content types here.');
-  next();
-});
-
-let apiRoutes = require('./routes/api');
-let webRoutes = require('./routes/web');
-app.use('/api', apiRoutes);
-app.use('/', webRoutes);
+// App Routes
+app.use('/api', require('./routes/api'))
+   .use('/',    require('./routes/web'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+  var err = new Error('Resource not found: ' + req.path);
   err.status = 404;
-  next(err);
-});
-
-app.use('/api', function(err, req, res, next) {
-  console.log(req);
-  res.status(404).send({
-    message: 'Not Found',
-    error: err
-  });
+  next(err, req, res, next);
 });
 
 // error handler
@@ -53,7 +38,17 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+
+  if (req.path.includes("/api/")) {
+    res.json({
+      error: {
+        message: err.message,
+        status: err.status
+      }
+    });
+  } else {
+    res.render('error');
+  }
 });
 
 module.exports = app;
