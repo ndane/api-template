@@ -3,11 +3,11 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "lint": "eslint .",
     "build": "rimraf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
     "migrate": "node_modules/.bin/sequelize db:migrate",
-    "dev": "npm run build; npm run migrate; babel-node bin/www",
+    "dev": "npm run lint; npm run build; npm run migrate; babel-node bin/www",
     "serve": "npm run build && npm run migrate && node dist/app.js",
-
     "start": "nodemon --exec npm run dev"
   },
   "engines": {
@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
+    "babel-eslint": "^7.2.3",
     "babel-preset-es2015": "^6.24.1",
     "eslint": "^4.3.0",
     "eslint-plugin-node": "^5.1.1",
