@@ -5,8 +5,10 @@
   "scripts": {
     "build": "rimraf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
     "migrate": "node_modules/.bin/sequelize db:migrate",
-    "start": "npm run migrate && nodemon --exec babel-node app.js",
-    "serve": "npm run build && npm run migrate && node dist/app.js"
+    "dev": "npm run build; npm run migrate; babel-node bin/www",
+    "serve": "npm run build && npm run migrate && node dist/app.js",
+
+    "start": "nodemon --exec npm run dev"
   },
   "engines": {
     "node": ">=4.0.0"
