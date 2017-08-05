@@ -1,21 +1,55 @@
+'use strict';
+
+const mongoose = require('mongoose');
+
+const User = mongoose.model('Users');
+
 module.exports = {
   users(req, res) {
-    res.json({ message: 'List of users' });
+    User.find({}, (err, users) => {
+      if (err) {
+        res.send(err);
+      }
+      res.json(users);
+    });
   },
 
   create(req, res) {
-    res.json({ message: 'Creating a user' });
+    const newUser = new User(req.body);
+    newUser.save((err, user) => {
+      if (err) {
+        res.send(err);
+      }
+      res.json(user);
+    });
   },
 
   user(req, res) {
-    res.json({ message: `Single user with id ${req.params.id}` });
+    User.findById(req.params.id, (err, user) => {
+      if (err) {
+        res.send(err);
+      }
+      res.send(user);
+    });
   },
 
   update(req, res) {
-    res.json({ message: `Update user with id ${req.params.id}` });
+    const dictionary = { _id: req.params.id };
+    User.findOneAndUpdate(dictionary, req.body, { new: true }, (err, user) => {
+      if (err) {
+        res.send(err);
+      }
+      res.json(user);
+    });
   },
 
   delete(req, res) {
-    res.json({ message: `Delete user with id ${req.params.id}` });
+    /* User.remove({ _id: req.params.id }, (err) => {
+      if (err) {
+        res.send(err);
+      }
+      res.json({ message: `eleted user with ID ${req.params.id}` });
+    }); */
+    res.json({ message: 'DELETE verb not supported for this model' });
   },
 };
