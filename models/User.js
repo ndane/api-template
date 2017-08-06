@@ -19,10 +19,20 @@ const UserSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
+    select: false,
   },
   created_at: {
     type: Date,
     default: Date.now,
+  },
+});
+
+// Transformations
+UserSchema.set('toJSON', {
+  virtuals: true,
+  versionKey: false,
+  transform: function transform(doc, ret) {
+    delete ret._id;
   },
 });
 
