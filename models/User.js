@@ -28,7 +28,7 @@ const UserSchema = new mongoose.Schema({
 
 // Password hashing middleware for mongoose
 /* eslint-disable consistent-return */
-UserSchema.pre('save', (next) => {
+UserSchema.pre('save', function encryptPassword(next) {
   const user = this;
   if (!user.isModified('password')) {
     return next();
@@ -46,7 +46,7 @@ UserSchema.pre('save', (next) => {
 });
 
 // Password matching
-UserSchema.methods.comparePassword = (password, cb) => {
+UserSchema.methods.comparePassword = function compare(password, cb) {
   bcrypt.compare(password, this.password, (err, isMatch) => {
     if (err) { return cb(err); }
     cb(null, isMatch);
