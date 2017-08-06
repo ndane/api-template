@@ -32,22 +32,6 @@ const UserSchema = new BaseSchema({
   },
 });
 
-// Transformations
-UserSchema.set('toJSON', {
-  virtuals: true,
-  versionKey: false,
-  transform: function transform(doc, ret) {
-    const model = ret;
-
-    // Transform data
-    // eslint-disable-next-line no-underscore-dangle
-    delete model._id;
-    delete model.password;
-
-    return model;
-  },
-});
-
 // Password hashing middleware for mongoose
 /* eslint-disable consistent-return */
 UserSchema.pre('save', function encryptPassword(next) {
