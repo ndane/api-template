@@ -2,10 +2,11 @@
 
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const BaseSchema = require('./BaseSchema');
 
 const saltWorkFactor = 10;
 
-const UserSchema = new mongoose.Schema({
+const UserSchema = new BaseSchema({
   username: {
     type: String,
     required: 'Please enter a username',
@@ -25,6 +26,10 @@ const UserSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  updated_at: {
+    type: Date,
+    default: null,
+  },
 });
 
 // Transformations
@@ -32,7 +37,14 @@ UserSchema.set('toJSON', {
   virtuals: true,
   versionKey: false,
   transform: function transform(doc, ret) {
-    delete ret._id;
+    const model = ret;
+
+    // Transform data
+    // eslint-disable-next-line no-underscore-dangle
+    delete model._id;
+    delete model.password;
+
+    return model;
   },
 });
 
@@ -40,6 +52,7 @@ UserSchema.set('toJSON', {
 /* eslint-disable consistent-return */
 UserSchema.pre('save', function encryptPassword(next) {
   const user = this;
+
   if (!user.isModified('password')) {
     return next();
   }
@@ -53,6 +66,16 @@ UserSchema.pre('save', function encryptPassword(next) {
       next();
     });
   });
+});
+
+UserSchema.pre('findOneAndUpdate', function updatedAt(next) {
+  this.update({}, {
+    $set: {
+      updated_at: Date.now(),
+    },
+  });
+
+  next();
 });
 
 // Password matching

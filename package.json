@@ -7,7 +7,7 @@
     "build": "rimraf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
     "dev": "npm run lint; npm run build; node bin/www",
     "serve": "npm run build && node dist/app.js",
-    "start": "nodemon --exec npm run dev"
+    "start": "DEBUG=express,api nodemon --exec npm run dev"
   },
   "engines": {
     "node": ">=4.0.0"
