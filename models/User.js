@@ -18,7 +18,6 @@ const UserSchema = new BaseSchema({
   password: {
     type: String,
     required: true,
-    select: false,
   },
 },
 {
@@ -50,8 +49,13 @@ UserSchema.pre('save', function encryptPassword(next) {
 
 // Password matching
 UserSchema.methods.comparePassword = function compare(password, cb) {
+  console.log(this);
   bcrypt.compare(password, this.password, (err, isMatch) => {
-    if (err) { return cb(err); }
+    if (err) {
+      console.log(err);
+      return cb(err);
+    }
+
     cb(null, isMatch);
   });
 };
