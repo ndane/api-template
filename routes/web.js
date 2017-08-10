@@ -1,4 +1,4 @@
-const express = require('express');
+import express from 'express';
 
 /* Base Router */
 const router = express.Router();

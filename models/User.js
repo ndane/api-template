@@ -1,8 +1,8 @@
 'use strict';
 
-const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
-const BaseSchema = require('./BaseSchema');
+import mongoose from 'mongoose';
+import bcrypt from 'bcrypt';
+import BaseSchema from './BaseSchema';
 
 const saltWorkFactor = 10;
 
@@ -71,4 +71,4 @@ UserSchema.methods.comparePassword = function compare(password, cb) {
 };
 /* eslint-enable consistent-return */
 
-module.exports = mongoose.model('Users', UserSchema);
+export default mongoose.model('Users', UserSchema);

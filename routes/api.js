@@ -1,4 +1,6 @@
-const express = require('express');
+'use strict';
+
+import express from 'express';
 
 /* Base Router */
 const router = express.Router();

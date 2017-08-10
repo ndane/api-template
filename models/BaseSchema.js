@@ -1,8 +1,8 @@
 'use strict';
 
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
-class BaseSchema extends mongoose.Schema {
+export default class BaseSchema extends mongoose.Schema {
   constructor(params) {
     super(params);
 
@@ -23,5 +23,3 @@ class BaseSchema extends mongoose.Schema {
     });
   }
 }
-
-module.exports = BaseSchema;
