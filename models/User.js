@@ -22,13 +22,11 @@ const UserSchema = new BaseSchema({
     required: true,
     select: false,
   },
-  created_at: {
-    type: Date,
-    default: Date.now,
-  },
-  updated_at: {
-    type: Date,
-    default: null,
+},
+{
+  timestamps: {
+    createdAt: 'created_at',
+    updatedAt: 'updated_at',
   },
 });
 
@@ -50,16 +48,6 @@ UserSchema.pre('save', function encryptPassword(next) {
       next();
     });
   });
-});
-
-UserSchema.pre('findOneAndUpdate', function updatedAt(next) {
-  this.update({}, {
-    $set: {
-      updated_at: Date.now(),
-    },
-  });
-
-  next();
 });
 
 // Password matching
