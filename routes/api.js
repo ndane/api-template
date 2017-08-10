@@ -18,4 +18,4 @@ router.route('/users/:id')
   .put(UserController.update)
   .delete(UserController.delete);
 
-module.exports = router;
+export default router;

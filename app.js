@@ -7,6 +7,10 @@ import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import mongooseConfig from './config/mongoose';
 
+/* App Routes */
+import apiRoutes from './routes/api';
+import webRoutes from './routes/web';
+
 const app = express();
 
 // DB set up
@@ -25,8 +29,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // App Routes
-app.use('/api', require('./routes/api'))
-  .use('/', require('./routes/web'));
+app.use('/api', apiRoutes)
+  .use('/', webRoutes);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

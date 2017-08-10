@@ -8,4 +8,4 @@ router.get('/', (req, res) => {
   res.render('index', { title: 'nothing' });
 });
 
-module.exports = router;
+export default router;
