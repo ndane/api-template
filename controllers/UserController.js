@@ -50,7 +50,7 @@ export default {
       if (err) {
         res.send(err);
       }
-      res.json({ message: `eleted user with ID ${req.params.id}` });
+      res.json({ message: `deleted user with ID ${req.params.id}` });
     }); */
     res.json({ message: 'DELETE verb not supported for this model' });
   },
