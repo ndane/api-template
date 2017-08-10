@@ -1,5 +1,3 @@
-'use strict';
-
 require('../models/User');
 
 module.exports = {

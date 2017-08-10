@@ -1,5 +1,3 @@
-'use strict';
-
 import mongoose from 'mongoose';
 
 export default class BaseSchema extends mongoose.Schema {
