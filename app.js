@@ -9,6 +9,7 @@ import mongooseConfig from './config/mongoose';
 
 /* App Routes */
 import apiRoutes from './routes/api';
+import apiRoutesProtected from './routes/api-protected';
 import webRoutes from './routes/web';
 
 const app = express();
@@ -30,6 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // App Routes
 app.use('/api', apiRoutes)
+  .use('/api', apiRoutesProtected)
   .use('/', webRoutes);
 
 // catch 404 and forward to error handler
