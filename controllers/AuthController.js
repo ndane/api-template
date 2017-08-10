@@ -31,6 +31,6 @@ export default {
           token,
         });
       });
-    });
+    }).select('+password');
   },
 };
