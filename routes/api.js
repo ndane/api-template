@@ -2,11 +2,11 @@
 
 import express from 'express';
 
+/* Controllers */
+import UserController from '../controllers/UserController';
+
 /* Base Router */
 const router = express.Router();
-
-/* Controllers */
-const UserController = require('../controllers/UserController');
 
 /* User Routes */
 router.route('/users')

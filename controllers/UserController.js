@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 
 const User = mongoose.model('Users');
 
-module.exports = {
+export default {
   users(req, res) {
     User.find({}, (err, users) => {
       if (err) {
