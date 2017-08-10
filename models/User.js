@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
+import timestamp from 'mongoose-timestamp';
 import BaseSchema from './BaseSchema';
 
 const saltWorkFactor = 10;
@@ -20,13 +21,10 @@ const UserSchema = new BaseSchema({
     required: true,
     select: false,
   },
-},
-{
-  timestamps: {
-    createdAt: 'created_at',
-    updatedAt: 'updated_at',
-  },
 });
+
+// Plugins
+UserSchema.plugin(timestamp);
 
 // Password hashing middleware for mongoose
 /* eslint-disable consistent-return */
