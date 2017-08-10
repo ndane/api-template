@@ -35,6 +35,10 @@ module.exports = {
 
   update(req, res) {
     const dictionary = { _id: req.params.id };
+
+    // Remove ability to update password via update call
+    delete req.body.password;
+
     User.findOneAndUpdate(dictionary, req.body, { new: true }, (err, user) => {
       if (err) {
         res.send(err);
