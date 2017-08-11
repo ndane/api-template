@@ -1,6 +1,5 @@
 import express from 'express';
-import jwt from 'jsonwebtoken';
-import Secrets from '../config/secrets';
+import authenticator from './authenticator';
 
 /* Controllers */
 import UserController from '../controllers/UserController';
@@ -9,29 +8,7 @@ import UserController from '../controllers/UserController';
 const router = express.Router();
 
 /* JWT Authentication */
-function respondWithError(res) {
-  return res.status(403).json({ message: 'Forbidden' });
-}
-
-router.use((req, res, next) => {
-  const token = req.body.token || req.query.token || req.headers.bearer;
-
-  if (!token) {
-    return respondWithError(res);
-  }
-
-  // Check token
-  jwt.verify(token, Secrets.key, (err, decoded) => {
-    if (err) {
-      return respondWithError(res);
-    }
-
-    req.decoded = decoded;
-    return next();
-  });
-
-  return null;
-});
+router.use(authenticator);
 
 /* User Routes */
 router.route('/users')
