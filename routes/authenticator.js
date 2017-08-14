@@ -6,8 +6,19 @@ function respondWithError(res) {
 }
 
 export default (req, res, next) => {
-  const token = req.body.token || req.query.token || req.headers.bearer;
+  let authorization = req.headers.authorization;
 
+  if (!authorization) {
+    return respondWithError(res);
+  }
+
+  authorization = authorization.split(' ');
+
+  if (authorization[0] !== 'Bearer') {
+    return respondWithError(res);
+  }
+
+  const token = authorization[1];
   if (!token) {
     return respondWithError(res);
   }
