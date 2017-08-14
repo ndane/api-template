@@ -13,7 +13,7 @@ export default (req, res, next) => {
   }
 
   // Check token
-  jwt.verify(token, Secrets.key, (err, decoded) => {
+  jwt.verify(token, Secrets.jwtKey, (err, decoded) => {
     if (err) {
       return respondWithError(res);
     }

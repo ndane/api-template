@@ -21,8 +21,12 @@ export default {
           return;
         }
 
-        const token = jwt.sign(user, Secrets.key, {
-          expiresIn: 1440,
+        const signingData = {
+          signature: `${user.email}|${user.username}|${user.createdAt}`,
+        };
+
+        const token = jwt.sign(signingData, Secrets.jwtKey, {
+          expiresIn: 10080,
         });
 
         res.json({
