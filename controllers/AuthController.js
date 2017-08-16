@@ -26,7 +26,7 @@ export default {
         };
 
         const token = jwt.sign(signingData, Secrets.jwtKey, {
-          expiresIn: 10080,
+          expiresIn: 2629743, // One month
         });
 
         res.json({
