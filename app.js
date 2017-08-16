@@ -16,7 +16,7 @@ import webRoutes from './routes/web';
 const app = express();
 
 // DB set up
-mongoose.Promis = global.Promise;
+mongoose.Promise = global.Promise;
 mongoose.connect(mongooseConfig.url, { useMongoClient: true });
 
 // view engine setup
@@ -29,6 +29,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Determine Request type
+app.use((req, res, next) => {
+  const contentType = req.headers['content-type'];
+  req.isAPIRequest = (
+    contentType === 'application/json' ||
+    contentType === 'application/x-www-form-urlencoded'
+  );
+  next();
+});
 
 // App Routes
 app.use('/api', apiRoutes)
